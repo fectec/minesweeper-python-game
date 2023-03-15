@@ -13,7 +13,7 @@ root.configure(bg = "black")
 # Changing window size and title
 
 root.geometry(f'{settings.WIDTH}x{settings.HEIGHT}')
-root.title("Minesweeper game")
+root.title("Minesweeper Game")
 
 # Prohibiting window resizing
 
