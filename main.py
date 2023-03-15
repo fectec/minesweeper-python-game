@@ -1,4 +1,5 @@
 from tkinter import *
+import settings
 
 # Instantiating a window instance
 
@@ -10,7 +11,7 @@ root.configure(bg = "black")
 
 # Changing window size and title
 
-root.geometry('1440x720')
+root.geometry(f'{settings.WIDTH}x{settings.HEIGHT}')
 root.title("Minesweeper game")
 
 # Prohibiting window resizing
