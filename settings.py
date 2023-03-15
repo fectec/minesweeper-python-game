@@ -1,4 +1,4 @@
-# CONSTANT VALUES
+# Constant values
 
 WIDTH = 1440
 HEIGHT = 720
