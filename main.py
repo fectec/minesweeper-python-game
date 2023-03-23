@@ -41,6 +41,17 @@ left_frame = Frame(
 
 left_frame.place(x = 0, y = utils.window_dimensions_percentage(False, 25))
 
+# Creating center frame
+
+center_frame = Frame(
+    root,
+    bg = 'green', # Change later to black
+    width = utils.window_dimensions_percentage(True, 75),
+    height = utils.window_dimensions_percentage(False, 75)
+)
+
+center_frame.place(x = utils.window_dimensions_percentage(True, 25), y = utils.window_dimensions_percentage(False, 25))
+
 # Running the window
 
 root.mainloop()
