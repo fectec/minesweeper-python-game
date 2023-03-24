@@ -58,7 +58,7 @@ center_frame.place(x = utils.window_dimensions_percentage(True, 25), y = utils.w
 for i in range(settings.GRID_SIZE):
     for j in range(settings.GRID_SIZE):
 
-        cell = Cell()
+        cell = Cell(i, j)
         cell.create_button_obtect(center_frame)
         cell.cell_button_object.grid(
             column = i,
