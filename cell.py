@@ -1,6 +1,10 @@
 from tkinter import Button
+import random
+import settings
 
 class Cell:
+
+    all = []
 
     def __init__(self, x, y, is_mine = False):
 
@@ -8,6 +12,10 @@ class Cell:
         self.x = x
         self.y = y
         self.cell_button_object = None
+        
+        # Append the object to the Cell.all list
+
+        Cell.all.append(self)
 
     def create_button_obtect(self, location):
 
@@ -30,3 +38,17 @@ class Cell:
     def rigth_click_actions(self, event):
         print(event)
         print("I am rigth click")
+
+    @staticmethod
+
+    def randomize_mines():
+
+        picked_cells = random.sample(Cell.all, settings.MINES_COUNT)
+        
+        for picked_cell in picked_cells:
+            picked_cell.is_mine = True
+
+    # Overriding representation method
+
+    def __repr__(self):
+        return f"Cell({self.x}, {self.y})"
