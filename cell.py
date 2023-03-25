@@ -1,6 +1,8 @@
 from tkinter import Button, Label
 import random
 import settings
+import ctypes
+import sys
 
 class Cell:
 
@@ -114,11 +116,13 @@ class Cell:
 
             self.show_number_of_surrounding_mines()
             
-    # Method to interrupt the game and display message that player lost
+    # Method to display message that player lost and interrupt the game
 
     def show_mine(self):
+        
+        ctypes.windll.user32.MessageBoxW(0, 'You clicked on a mine.', 'Game Over', 0)
 
-        self.change_cell_color("red")
+        sys.exit()
 
     @property
 
@@ -170,6 +174,10 @@ class Cell:
             # Decrease cell count
 
             Cell.decrease_cell_count(1)
+            
+            if self.is_marked: # If the Cell is marked, its background color will change to the Default one
+
+                self.change_cell_color('SystemButtonFace')
 
             self.cell_button_object.configure(text = f"{self.number_of_surrounding_mines}")
             
