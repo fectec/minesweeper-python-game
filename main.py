@@ -65,6 +65,8 @@ for i in range(settings.GRID_SIZE):
             row = j
         )
 
+Cell.randomize_mines()
+
 # Running the window
 
 root.mainloop()
