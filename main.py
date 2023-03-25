@@ -59,7 +59,7 @@ for i in range(settings.GRID_SIZE):
     for j in range(settings.GRID_SIZE):
 
         cell = Cell(i, j)
-        cell.create_button_obtect(center_frame)
+        cell.create_button_object(center_frame)
         cell.cell_button_object.grid(
             column = i,
             row = j

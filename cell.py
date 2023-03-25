@@ -23,6 +23,16 @@ class Cell:
 
         Cell.all.append(self)
 
+    # Method to return a Cell Object based on the value of X, Y
+    
+    def get_cell_by_axis(self, x, y):
+
+        for cell in Cell.all:
+
+            if cell.x == x and cell.y == y:
+
+                return cell
+
     # Method to create Button Object
 
     def create_button_object(self, location):
@@ -50,12 +60,63 @@ class Cell:
             
             self.show_mine()
 
+        else:
+
+            self.show_number_of_surrounding_mines()
+            
     # Method to interrupt the game and display message that player lost
 
     def show_mine(self):
 
         self.cell_button_object.configure(bg = 'red')
 
+    @property
+
+    # Method to get a list of Cell Objects that surround a Cell Object
+
+    def surrounding_cells(self):
+
+        # List of Cell Objects that surround a Cell Object
+
+        cells = [
+            self.get_cell_by_axis(self.x - 1, self.y - 1),
+            self.get_cell_by_axis(self.x - 1, self.y),
+            self.get_cell_by_axis(self.x - 1, self.y + 1),
+            self.get_cell_by_axis(self.x + 1, self.y - 1),
+            self.get_cell_by_axis(self.x + 1, self.y),
+            self.get_cell_by_axis(self.x + 1, self.y + 1),
+            self.get_cell_by_axis(self.x, self.y - 1),
+            self.get_cell_by_axis(self.x, self.y + 1),
+            ]
+
+        #  Remove None values in cells list
+
+        cells = [cell for cell in cells if cell is not None]
+
+        return cells
+
+    @property
+
+    # Method to get the number of mines surrounding a Cell Object
+
+    def number_of_surrounding_mines(self):
+
+        counter = 0
+       
+        for cell in self.surrounding_cells:
+
+            if cell.is_mine:
+
+                counter += 1
+
+        return counter
+    
+    # Method to show the number of mines surrounding a Cell Object
+
+    def show_number_of_surrounding_mines(self):
+
+        self.cell_button_object.configure(text = f"{self.number_of_surrounding_mines}")
+        
     # Method with actions to do when Button Object of Cell Object is rigth-clicked
     
     def rigth_click_actions(self, event):
