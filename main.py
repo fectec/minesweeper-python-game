@@ -65,6 +65,13 @@ for i in range(settings.GRID_SIZE):
             row = j
         )
 
+# Creating Cell Count Label 
+
+Cell.create_cell_count_label(left_frame)
+Cell.cell_count_label_object.place(x = 0, y = 0)
+
+# Randomizing mines
+
 Cell.randomize_mines()
 
 # Running the window

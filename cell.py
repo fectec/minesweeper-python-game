@@ -1,4 +1,4 @@
-from tkinter import Button
+from tkinter import Button, Label
 import random
 import settings
 
@@ -8,15 +8,25 @@ class Cell:
 
     all = []
 
+    # Self-explanatory
+
+    cell_count_label_object = None
+
+    # Cell count variable
+
+    cell_count = settings.CELL_COUNT
+
     # Constructor
 
-    def __init__(self, x, y, is_mine = False):
+    def __init__(self, x, y, is_mine = False, is_opened = False, is_marked = False):
 
         # Attributes
 
-        self.is_mine = is_mine # Cell Object Is or Is Not a Mine
         self.x = x # Cell Object Identifier (X position on Grid)
         self.y = y # Cell Object Identifier (Y position on Grid)
+        self.is_mine = is_mine # Cell Object Is or Is Not a Mine
+        self.is_opened = is_opened # Cell Object Is or Is Not Opened
+        self.is_marked = is_marked # Cell Object Is or Is Not Marked by the Player
         self.cell_button_object = None # Cell Object Button Object
         
         # Append the object to the Cell.all list
@@ -52,6 +62,40 @@ class Cell:
               
         self.cell_button_object = button
 
+    # Method to change a Cell Object Button Object Background Color
+    
+    def change_cell_color(self, color):
+
+        self.cell_button_object.configure(bg = color)
+    
+    # Self-explanatory methods
+
+    @staticmethod
+
+    def create_cell_count_label(location):
+
+        label = Label(
+            location,
+            bg = 'black',
+            fg = 'white',
+            text = f"Cells Left: {Cell.cell_count}",
+            font = ("", 30)
+        )
+
+        Cell.cell_count_label_object = label
+
+    @staticmethod
+
+    def modify_cell_count_label_text(text):
+
+        Cell.cell_count_label_object.configure(text = f"Cells Left: {text}")
+
+    @staticmethod
+
+    def decrease_cell_count(number):
+
+        Cell.cell_count -= number
+
     # Method with actions to do when Button Object of Cell Object is left-clicked
 
     def left_click_actions(self, event):
@@ -62,13 +106,19 @@ class Cell:
 
         else:
 
+            if self.number_of_surrounding_mines == 0:
+
+                for cell in self.surrounding_cells:
+
+                    cell.show_number_of_surrounding_mines()
+
             self.show_number_of_surrounding_mines()
             
     # Method to interrupt the game and display message that player lost
 
     def show_mine(self):
 
-        self.cell_button_object.configure(bg = 'red')
+        self.change_cell_color("red")
 
     @property
 
@@ -114,15 +164,38 @@ class Cell:
     # Method to show the number of mines surrounding a Cell Object
 
     def show_number_of_surrounding_mines(self):
-
-        self.cell_button_object.configure(text = f"{self.number_of_surrounding_mines}")
         
+        if not self.is_opened:  
+
+            # Decrease cell count
+
+            Cell.decrease_cell_count(1)
+
+            self.cell_button_object.configure(text = f"{self.number_of_surrounding_mines}")
+            
+            # Replace the text of the cell count label with the newer count
+
+            if Cell.cell_count_label_object:
+
+                Cell.modify_cell_count_label_text(Cell.cell_count)
+
+            # Marks the cell as opened
+
+            self.is_opened = True
+
     # Method with actions to do when Button Object of Cell Object is rigth-clicked
     
     def rigth_click_actions(self, event):
-        
-        print(event)
-        print("I am rigth click")
+
+        if not self.is_marked:
+
+            self.change_cell_color("blue")
+            self.is_marked = True
+
+        else:
+
+            self.change_cell_color("SystemButtonFace")
+            self.is_marked = False
 
     @staticmethod
 
