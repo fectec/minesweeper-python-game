@@ -115,6 +115,11 @@ class Cell:
                     cell.show_number_of_surrounding_mines()
 
             self.show_number_of_surrounding_mines()
+
+        # Cancel Left and Rigth Click Events if Cell is Already Openend:
+
+        self.cell_button_object.unbind('<Button-1>')
+        self.cell_button_object.unbind('<Button-3>')
             
     # Method to display message that player lost and interrupt the game
 
