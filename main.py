@@ -9,12 +9,12 @@ root = Tk()
 
 # Changing window background color
 
-root.configure(bg = "black")
+root.configure(bg = 'black')
 
 # Changing window size and title
 
 root.geometry(f'{settings.WIDTH}x{settings.HEIGHT}')
-root.title("Minesweeper Game")
+root.title('Minesweeper Game')
 
 # Prohibiting window resizing
 
@@ -52,6 +52,18 @@ center_frame = Frame(
 )
 
 center_frame.place(x = utils.window_dimensions_percentage(True, 25), y = utils.window_dimensions_percentage(False, 25))
+
+# Creating Game Title
+
+game_title = Label(
+    top_frame,
+    bg = 'black',
+    fg = 'white',
+    text = 'Minesweeper',
+    font = ('', 48)
+)
+
+game_title.place(x = utils.window_dimensions_percentage(True, 25), y = utils.window_dimensions_percentage(True, 2))
 
 # Creating Grid of Buttons
 

@@ -116,6 +116,13 @@ class Cell:
 
             self.show_number_of_surrounding_mines()
 
+            # If Mines Count Is Equal to The Remaining Cells Count, Player Won
+            
+            if settings.MINES_COUNT == Cell.cell_count:
+                
+                ctypes.windll.user32.MessageBoxW(0, 'Congragulations! You won!', 'Game Over', 0)
+                sys.exit()
+
         # Cancel Left and Rigth Click Events if Cell is Already Openend:
 
         self.cell_button_object.unbind('<Button-1>')
@@ -126,7 +133,6 @@ class Cell:
     def show_mine(self):
         
         ctypes.windll.user32.MessageBoxW(0, 'You clicked on a mine.', 'Game Over', 0)
-
         sys.exit()
 
     @property
