@@ -60,10 +60,15 @@ game_title = Label(
     bg = 'black',
     fg = 'white',
     text = 'Minesweeper',
-    font = ('', 48)
+    font = ('', 45)
 )
 
 game_title.place(x = utils.window_dimensions_percentage(True, 25), y = utils.window_dimensions_percentage(True, 2))
+
+# Creating Cell Count Label 
+
+Cell.create_cell_count_label(left_frame)
+Cell.cell_count_label_object.place(x = utils.window_dimensions_percentage(True, 2), y = 0)
 
 # Creating Grid of Buttons
 
@@ -76,11 +81,6 @@ for i in range(settings.GRID_SIZE):
             column = i,
             row = j
         )
-
-# Creating Cell Count Label 
-
-Cell.create_cell_count_label(left_frame)
-Cell.cell_count_label_object.place(x = 0, y = 0)
 
 # Randomizing mines
 
